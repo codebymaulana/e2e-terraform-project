@@ -1,0 +1,10 @@
+cluster:
+  clusterName: gke-cluster
+  environmentGitOwner: ""
+  gitKind: github
+  gitName: ""
+  gitServer: https://github.com
+  project: airy-dialect-457307-h8
+  provider: gke
+  zone: ""
+  region: asia-southeast1

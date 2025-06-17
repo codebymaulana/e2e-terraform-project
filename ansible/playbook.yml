@@ -1,0 +1,80 @@
+---
+- hosts: all
+  become: yes
+  vars_files:
+    - vars.yml
+
+  pre_tasks:
+    - name: Add an Apt signing key, uses whichever key is at the URL
+      ansible.builtin.apt_key:
+        url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+        state: present
+
+    - name: Add postgresql repo
+      ansible.builtin.apt_repository:
+        repo: deb https://apt.postgresql.org/pub/repos/apt jammy-pgdg main
+        state: present
+
+    - name: "Install Postgresql"
+      ansible.builtin.apt:
+        name: postgresql-16
+        state: present
+        update_cache: yes
+
+    - name: "Install deps"
+      ansible.builtin.apt:
+        name: python3-psycopg2
+        state: present
+        update_cache: yes
+
+    - name: Ensure ACL package present (safe option)
+      package:
+        name: acl
+        state: present
+
+  tasks:
+    - name: "Start and enable postgresql services"
+      ansible.builtin.systemd_service:
+        state: started
+        name: postgresql
+        enabled: true
+
+    - name: Create a new database
+      community.postgresql.postgresql_db:
+        name: "{{db_name}}"
+      become_user: postgres
+
+    - name: create user password postgres for app
+      community.postgresql.postgresql_user:
+        name: "{{db_user}}"
+        password: "{{db_password}}"
+      become_user: postgres
+
+    - name: grant all privileges to app user on app db
+      community.postgresql.postgresql_privs:
+        login_db: "{{db_name}}"
+        privs: ALL
+        type: database
+        obj: "{{db_name}}"
+        role: "{{db_user}}"
+      become_user: postgres
+
+    - name: update pg_hba
+      community.postgresql.postgresql_pg_hba:
+        dest: /etc/postgresql/16/main/pg_hba.conf
+        contype: host
+        users: all
+        source: 0.0.0.0/0
+        databases: all
+        method: md5
+
+    - name: Set listen address
+      ansible.builtin.lineinfile:
+        dest: /etc/postgresql/16/main/postgresql.conf
+        regexp: '^listen_addresses.*$'
+        line: "listen_addresses = '*'"
+
+    - name: "Start and enable postgresql services"
+      ansible.builtin.systemd_service:
+        state: restarted
+        name: postgresql
