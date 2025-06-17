@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: jx-boot
-          image: ghcr.io/jenkins-x/jx-boot:3.11.92
+          image: ghcr.io/jenkins-x/jx-boot:3.11.97
           imagePullPolicy: IfNotPresent
           args:
             - jx
