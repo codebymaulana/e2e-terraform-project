@@ -5,7 +5,7 @@ resource "google_service_account" "default" {
 
 resource "google_container_cluster" "primary" {
   name     = var.name
-  location = var.region
+  location = var.location
   network = var.network
   subnetwork = var.subnetwork
   remove_default_node_pool = var.remove_default_node_pool
@@ -15,7 +15,7 @@ resource "google_container_cluster" "primary" {
 resource "google_container_node_pool" "node_pools" {
   for_each = { for node in var.node_pools : node.node_pool_name => node }
   name       = each.value.node_pool_name
-  location   = each.value.region_node_pool
+  location   = each.value.location
   cluster    = google_container_cluster.primary.name
   node_count = each.value.node_count
 

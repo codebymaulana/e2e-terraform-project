@@ -56,13 +56,13 @@ module "gke-private" {
   network = module.network.network_self_link
   subnetwork = module.network.subnetwork_self_link
   remove_default_node_pool = true
-  region = var.region
+  location = var.zone
   node_pools = [
     {
        node_pool_name = "node-pool-1"
        node_count = 3
        enable_private_nodes = true
-       region_node_pool = var.region_node_pool
+       location = var.zone
        machine_type = "e2-medium"
        preemptible = true
        disk_size_gb = 20

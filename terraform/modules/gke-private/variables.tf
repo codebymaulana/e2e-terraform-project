@@ -11,7 +11,7 @@ variable "subnetwork" {
     description = "subnetwork for gke cluster"
 }
 
-variable "region" {
+variable "location" {
   description = "region of GKE cluster"
   type = string
 }
@@ -25,8 +25,8 @@ variable "node_pools" {
   description = "List of node pools"
   type = list(object({
     node_pool_name          = string
-    region_node_pool       = string
     node_count = number
+    location = string
     enable_private_nodes = bool
     preemptible = bool
     machine_type = string
