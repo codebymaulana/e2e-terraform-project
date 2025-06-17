@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jx-boot
+spec:
+  template:
+    spec:
+      containers:
+        - name: jx-boot
+          image: ghcr.io/jenkins-x/jx-boot:3.11.92
+          imagePullPolicy: IfNotPresent
+          args:
+            - jx
+            - boot
+            - --requirements
+            - jx-requirements.yml
+      restartPolicy: Never
