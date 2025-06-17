@@ -17,7 +17,9 @@ spec:
     registry: gcr.io
     terraform: true
   environments:
-  - key: testing
+  - key: dev
+  - key: staging
+  - key: production
   ingress:
     domain: ""
     externalDNS: false
