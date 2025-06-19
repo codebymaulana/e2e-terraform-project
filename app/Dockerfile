@@ -6,11 +6,10 @@ COPY main.go .
 
 RUN go build main.go
 
-
 FROM alpine
 
 WORKDIR app
 
-COPY --from=build-stage /app/main .
+COPY --from=build-stage /go/app/main .
 
 CMD ["./main"]
