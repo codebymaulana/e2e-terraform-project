@@ -9,7 +9,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   IMAGE_TAG: ${{ github.sha }}
-  FULL_IMAGE: ${{ env.PATH_GCR }}
+  FULL_IMAGE: ${{ vars.PATH_GCR }}
 
 jobs:
   build-and-bump:
