@@ -11,6 +11,6 @@ FROM alpine
 
 WORKDIR app
 
-COPY --from=build-stage main .
+COPY --from=build-stage /app/main .
 
-CMD main
+CMD ["./main"]
