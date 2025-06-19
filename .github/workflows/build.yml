@@ -6,11 +6,6 @@ on:
     branches: [main]
   workflow_dispatch:
 
-env:
-  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  IMAGE_TAG: ${{ github.sha }}
-  FULL_IMAGE: ${{ vars.PATH_GCR }}
-
 jobs:
   build-and-bump:
     runs-on: ubuntu-latest
@@ -22,7 +17,7 @@ jobs:
 
     - uses: google-github-actions/setup-gcloud@v2
       with:
-        project_id:  ${{ env.PROJECT_ID }}
+        project_id:  ${{ secrets.GCP_PROJECT_ID }}
         service_account_key: ${{ secrets.GCP_SA_KEY }}
         export_default_credentials: true
 
@@ -34,7 +29,7 @@ jobs:
         context: app
         push: true
         tags: |
-          ${{ env.FULL_IMAGE }}:${{ env.IMAGE_TAG }}
+          ${{ vars.PATH_GCR }}:${{ github.sha }}
 
     # - name: Bump Helm tag
     #   uses: fjogeleit/yaml-update-action@v0.16.1
