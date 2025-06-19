@@ -8,10 +8,8 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  IMAGE_NAME: golang-app
-  REGISTRY: gcr.io
   IMAGE_TAG: ${{ github.sha }}
-  FULL_IMAGE: ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.IMAGE_NAME }}
+  FULL_IMAGE: ${{ env.PATH_GCR }}
 
 jobs:
   build-and-bump:
