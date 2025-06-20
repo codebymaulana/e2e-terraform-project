@@ -4,7 +4,7 @@ helmDefaults:
 
 templates:
   default: &default
-    chart: stable/{{`{{ .Release.Name }}`}}
+    chart: ../charts/{{`{{ .Release.Name }}`}}
     namespace: default
     missingFileHandler: Warn
     values:
@@ -25,7 +25,6 @@ releases:
 
   - name: simple-app
     <<: *default
-    chart: ../charts/simple-app
 
   - name: grafana
     namespace: monitoring
