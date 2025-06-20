@@ -57,6 +57,9 @@ module "gke-private" {
   subnetwork = module.network.subnetwork_self_link
   remove_default_node_pool = true
   location = var.zone
+  deletion_protection = false
+  cluster_ipv4_cidr_block  = "10.4.0.0/14"
+  services_ipv4_cidr_block = "10.0.32.0/20"
   node_pools = [
     {
        node_pool_name = "node-pool-1"

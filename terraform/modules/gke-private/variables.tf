@@ -21,6 +21,23 @@ variable "remove_default_node_pool" {
     type = bool
 }
 
+variable "deletion_protection" {
+    description = "delete protection"
+    type = bool
+}
+
+variable "cluster_ipv4_cidr_block" {
+  description = "ipv4 cidr for gke container"
+  type = string
+}
+
+variable "services_ipv4_cidr_block" {
+  description = "ipv4 cidr for gke svc"
+  type = string
+}
+
+
+
 variable "node_pools" {
   description = "List of node pools"
   type = list(object({

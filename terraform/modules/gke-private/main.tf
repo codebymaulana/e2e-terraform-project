@@ -10,6 +10,13 @@ resource "google_container_cluster" "primary" {
   subnetwork = var.subnetwork
   remove_default_node_pool = var.remove_default_node_pool
   initial_node_count       = 1
+  deletion_protection = var.deletion_protection
+  ip_allocation_policy {
+    cluster_ipv4_cidr_block  = var.cluster_ipv4_cidr_block
+    services_ipv4_cidr_block = var.services_ipv4_cidr_block
+  }
+
+
 }
 
 resource "google_container_node_pool" "node_pools" {

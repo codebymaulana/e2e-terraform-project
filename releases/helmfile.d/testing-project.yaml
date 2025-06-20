@@ -1,5 +1,5 @@
 helmDefaults:
-  kubeContext: ""
+  kubeContext: "gke_airy-dialect-457307-h8_asia-southeast1-a_gke-cluster"
   timeout: 900
 
 templates:
@@ -27,8 +27,8 @@ releases:
 
   - name: simple-app
     <<: *default
-    namespace: cert-manager
-    chart: ../chart/simple-app
+    namespace: default
+    chart: ../charts/simple-app
 
   - name: grafana
     <<: *default
@@ -39,7 +39,7 @@ releases:
   - name: prometheus
     <<: *default
     namespace: monitoring
-    chart: ../chart/cert-manager-webhook-namecheap
+    chart: prometheus-community/prometheus
     version: 27.20.0
 
   - name: vault

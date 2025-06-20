@@ -22,7 +22,11 @@ jobs:
         service_account_key: ${{ secrets.GCP_SA_KEY }}
         export_default_credentials: true
 
-    - run: gcloud --quiet auth configure-docker asia-southeast1-docker.pkg.dev
+    - run: |
+        gcloud auth print-access-token \
+        --impersonate-service-account ${{ secrets.SA_ACCOUNT}} | docker login \
+        -u oauth2accesstoken \
+        --password-stdin https://asia-southeast1-docker.pkg.dev
 
     - uses: docker/setup-buildx-action@v3
     - uses: docker/build-push-action@v6
