@@ -20,7 +20,6 @@ releases:
     version: 1.18.0
 
   - name: nginx
-    <<: *default
     namespace: nginx
     chart: ingress-nginx/ingress-nginx
     version: 4.12.3
@@ -31,19 +30,16 @@ releases:
     chart: ../charts/simple-app
 
   - name: grafana
-    <<: *default
     namespace: monitoring
     chart: grafana/grafana
     version: 9.2.4
 
   - name: prometheus
-    <<: *default
     namespace: monitoring
     chart: prometheus-community/prometheus
     version: 27.20.0
 
   - name: vault
-    <<: *default
     namespace: vault
     chart: hashicorp/vault
     version: 0.30.0
