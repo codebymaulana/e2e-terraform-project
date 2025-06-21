@@ -23,7 +23,7 @@ jobs:
         export_default_credentials: true
 
     - run: |
-        echo ${{ secrets.GCP_SA_KEY }} > /tmp/gcloud-sa.json
+        echo "${{ secrets.GCP_SA_KEY }}" > /tmp/gcloud-sa.json
         gcloud auth activate-service-account --key-file=/tmp/gcloud-sa.json
         gcloud auth print-access-token \
         --impersonate-service-account ${{ secrets.SA_ACCOUNT}} | docker login \
