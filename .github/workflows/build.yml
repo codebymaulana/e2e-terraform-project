@@ -30,6 +30,16 @@ jobs:
         push: true
         tags: ${{ vars.PATH_GCR }}:${{ github.sha }}
 
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@0.28.0
+      with:
+        image-ref: '${{ vars.PATH_GCR }}:${{ github.sha }}'
+        format: 'table'
+        exit-code: '1'
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH'
+
     - name: Update Helm image tag manually
       run: |
         echo "Updating image tag to ${{ github.sha }}"
@@ -44,13 +54,3 @@ jobs:
         git push origin HEAD:main
       env:
         GITHUB_TOKEN: ${{ secrets.token_github }}
-
-    - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@0.28.0
-      with:
-        image-ref: '${{ vars.PATH_GCR }}:${{ github.sha }}'
-        format: 'table'
-        exit-code: '1'
-        ignore-unfixed: true
-        vuln-type: 'os,library'
-        severity: 'CRITICAL,HIGH'
