@@ -30,23 +30,10 @@ jobs:
         push: true
         tags: ${{ vars.PATH_GCR }}:${{ github.sha }}
 
-    # - uses: actions/checkout@v4
-    # - name: Bump Helm tag
-    #   uses: fjogeleit/yaml-update-action@main
-    #   with:
-    #     valueFile: releases/helmfile.d/values/testing-project/simple-app/values.yaml
-    #     propertyPath: image.tag
-    #     value: ${{ github.sha }}
-    #     commitChange: true
-    #     message: "bump image tag to ${{ github.sha }}"
-        # repository: codebymaulana/e2e-terraform-project
-        # token: ${{ secrets.token_github }}
-
     - name: Update Helm image tag manually
       run: |
         echo "Updating image tag to ${{ github.sha }}"
         yq eval '.image.tag = "${{ github.sha }}"' -i releases/helmfile.d/values/testing-project/simple-app/values.yaml
-
 
     - name: Commit and push updated image tag
       run: |
