@@ -31,7 +31,7 @@ jobs:
         tags: ${{ vars.PATH_GCR }}:${{ github.sha }}
 
     - name: Bump Helm tag
-      uses: fjogeleit/yaml-update-action@v0.16.1
+      uses: fjogeleit/yaml-update-action@main
       with:
         valueFile: releases/helmfile.d/values/testing-project/simple-app/values.yaml
         propertyPath: image.tag
