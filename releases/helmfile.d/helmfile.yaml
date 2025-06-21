@@ -17,6 +17,7 @@ releases:
     namespace: cert-manager
     chart: jetstack/cert-manager
     version: 1.18.0
+    installed: false
 
   - name: nginx
     namespace: nginx
@@ -25,6 +26,8 @@ releases:
 
   - name: simple-app
     <<: *default
+    labels:
+      argocd: true
 
   - name: grafana
     namespace: monitoring

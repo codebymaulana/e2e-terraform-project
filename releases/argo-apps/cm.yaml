@@ -18,5 +18,5 @@ data:
           - bash
           - -c
           - |
-            helmfile -e default -n "$ARGOCD_APP_NAMESPACE" template --include-crds -q
+            helmfile -e default -l argocd=true -n "$ARGOCD_APP_NAMESPACE" template --include-crds -q
       lockRepo: false
