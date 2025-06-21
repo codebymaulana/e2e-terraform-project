@@ -30,6 +30,7 @@ jobs:
         push: true
         tags: ${{ vars.PATH_GCR }}:${{ github.sha }}
 
+    - uses: actions/checkout@v4
     - name: Bump Helm tag
       uses: fjogeleit/yaml-update-action@main
       with:
@@ -38,6 +39,6 @@ jobs:
         value: ${{ github.sha }}
         commitChange: true
         message: "bump image tag to ${{ github.sha }}"
-        repository: codebymaulana/e2e-terraform-project
-        token: ${{ secrets.token_github }}
+        # repository: codebymaulana/e2e-terraform-project
+        # token: ${{ secrets.token_github }}
 
