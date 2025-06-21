@@ -40,7 +40,7 @@ module "compute" {
       boot_disk_size  = 20
       boot_disk_type  = "pd-standard"
       subnetwork      = module.network.subnetwork_self_link
-      run_ansible     = true
+      run_ansible     = false
       config_version  = "v1"
     }
   ]
