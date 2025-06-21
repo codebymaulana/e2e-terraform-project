@@ -38,4 +38,5 @@ jobs:
         value: ${{ github.sha }}
         commitChange: true
         message: "bump image tag to ${{ github.sha }}"
+        repository: codebymaulana/e2e-terraform-project
 
