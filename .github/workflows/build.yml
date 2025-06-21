@@ -42,18 +42,18 @@ jobs:
         # repository: codebymaulana/e2e-terraform-project
         # token: ${{ secrets.token_github }}
 
-- name: Update Helm image tag manually
-  run: |
-    echo "Updating image tag to ${{ github.sha }}"
-    yq eval '.image.tag = "${{ github.sha }}"' -i releases/helmfile.d/values/testing-project/simple-app/values.yaml
+    - name: Update Helm image tag manually
+      run: |
+        echo "Updating image tag to ${{ github.sha }}"
+        yq eval '.image.tag = "${{ github.sha }}"' -i releases/helmfile.d/values/testing-project/simple-app/values.yaml
 
 
-- name: Commit and push updated image tag
-  run: |
-    git config user.name "github-actions[bot]"
-    git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-    git add releases/helmfile.d/values/testing-project/simple-app/values.yaml
-    git commit -m "bump image tag simple-app to ${{ github.sha }}"
-    git push origin HEAD:main
-  env:
-    GITHUB_TOKEN: ${{ secrets.token_github }}
+    - name: Commit and push updated image tag
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add releases/helmfile.d/values/testing-project/simple-app/values.yaml
+        git commit -m "bump image tag simple-app to ${{ github.sha }}"
+        git push origin HEAD:main
+      env:
+        GITHUB_TOKEN: ${{ secrets.token_github }}
