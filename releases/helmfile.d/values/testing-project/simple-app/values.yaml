@@ -7,7 +7,7 @@ image:
   repository: asia-southeast1-docker.pkg.dev/airy-dialect-457307-h8/testing-project/golang-app
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "4f051be5e503c4bfcccd8d15610d951564d8ed6e"
+  tag: "6097208e24d14d4f1886dbf408a5d59ec819c923"
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
