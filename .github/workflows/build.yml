@@ -4,6 +4,8 @@ name: Build - Push image to GCR - Bump Helm tag
 on:
   push:
     branches: [main]
+    paths:
+      - releases/helmfile.d/values/testing-project
   workflow_dispatch:
 
 jobs:

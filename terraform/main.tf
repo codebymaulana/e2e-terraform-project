@@ -90,8 +90,7 @@ resource "null_resource" "ansible_runner" {
   provisioner "local-exec" {
     command = <<EOT
       sleep 60
-      cd /home/fmaulana/Documents/belajar/e2e-terraform-project/ansible/
-      ANSIBLE_VAULT_PASSWORD_FILE="vault_pass.txt" ansible-playbook -i '${self.triggers.ip_address},' playbook.yml --extra-vars "target_host=${self.triggers.ip_address}" -e "@vars.yaml"
+      ANSIBLE_HOST_KEY_CHECKING=False ANSIBLE_VAULT_PASSWORD_FILE="vault_pass.txt" ansible-playbook -i '${self.triggers.ip_address},' playbook.yml --extra-vars "target_host=${self.triggers.ip_address}" -e "@vars.yaml"
     EOT
   }
 

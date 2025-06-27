@@ -1,0 +1,13 @@
+FROM azbuilder/executor:2.26.1
+
+USER root
+
+RUN apt update && apt install -y \
+    python3-pip \
+    libpq-dev
+
+USER cnb
+
+COPY ansible .
+
+RUN pip install ansible psycopg2
