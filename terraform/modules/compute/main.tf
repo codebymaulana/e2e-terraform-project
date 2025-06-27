@@ -18,6 +18,6 @@ resource "google_compute_instance" "compute_engine" {
   }
 
   metadata = {
-    ssh-keys = "devops:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "devops:${each.value.ssh_public_key}"
   }
 }

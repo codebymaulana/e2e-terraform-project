@@ -10,5 +10,6 @@ variable "instances" {
     subnetwork     = string
     run_ansible    = optional(bool, false)
     config_version  = optional(string, "")
+    ssh_public_key = string
   }))
 }

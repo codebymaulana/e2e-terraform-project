@@ -42,6 +42,7 @@ module "compute" {
       subnetwork      = module.network.subnetwork_self_link
       run_ansible     = false
       config_version  = "v1"
+      ssh_public_key  = var.ssh_public_key
     }
   ]
 }
