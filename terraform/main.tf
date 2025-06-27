@@ -90,7 +90,7 @@ resource "null_resource" "ansible_runner" {
   provisioner "local-exec" {
     command = <<EOT
       sleep 60
-      ANSIBLE_HOST_KEY_CHECKING=False ~/.local/bin/ansible-playbook -i '${self.triggers.ip_address},' /workspace/playbook.yml --extra-vars "target_host=${self.triggers.ip_address}" -e "@/workspace/vars.yaml"
+      ANSIBLE_HOST_KEY_CHECKING=False ~/.local/bin/ansible-playbook -i '${self.triggers.ip_address},' /workspace/playbook.yml -u $ANSIBLE_USER --extra-vars "target_host=${self.triggers.ip_address}" -e "@/workspace/vars.yaml"
     EOT
   }
 
