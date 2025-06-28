@@ -14,6 +14,11 @@ provider "google" {
   region  = var.region
 }
 
+provider "vault" {
+  address = "http://10.0.1.9:8200"
+  token   = var.vault_token
+}
+
 terraform {
   backend "gcs" {
     bucket  = "tf-state-testing-project"

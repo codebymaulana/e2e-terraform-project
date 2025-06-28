@@ -44,6 +44,10 @@ releases:
     chart: hashicorp/vault
     version: 0.30.0
 
+  - name: argocd
+    namespace: argocd
+    chart: argo/argo-cd
+
 repositories:
   - name: stable
     url: "https://charts.helm.sh/stable"
@@ -59,3 +63,5 @@ repositories:
     url: https://helm.releases.hashicorp.com
   - name: prometheus-community
     url: https://prometheus-community.github.io/helm-charts
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
